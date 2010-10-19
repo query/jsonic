@@ -172,7 +172,7 @@ class SynthHandler(JSonicHandler):
             self.start_time = time.time()
         args = json_decode(self.request.body)
         pool = self.application.settings['pool']
-        engine = synthesizer.get_class(args.get('engine', 'espeak'))
+        engine = synthesizer.get_class(args['properties'].get('engine', 'espeak'))
         if engine is None:
             self.send_json_error({'description' : 'unknown speech engine'})
             return
