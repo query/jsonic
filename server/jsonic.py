@@ -262,7 +262,7 @@ class EngineHandler(JSonicHandler):
         :param name: str
         '''
         if name is None:
-            names = synthesizer.SYNTHS.keys()
+            names = synthesizer.AVAILABLE_SYNTHS.keys()
             ret = {'success' : True, 'result' : names}
             self.write(json_encode(ret))
         else:
@@ -388,6 +388,7 @@ def run(port=8888, processes=4, debug=False, static=False, pid=None):
         # log to console
         logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(message)s')
+    synthesizer.init()
     kwargs = {}
     kwargs['pool'] = pool = multiprocessing.Pool(processes=processes)
     if static:
