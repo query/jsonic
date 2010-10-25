@@ -23,7 +23,7 @@
     var SND1 = '../examples/sounds/18382__inferno__hvylas';
     var SND2 = '../examples/sounds/9081__tigersound__disappear';
     var UT1 = 'My first sentence.';
-    var UT2 = 'Another sentence from me.';
+    var UT2 = 'Apples oranges bananas.';
     // standard test fixture setup and teardown
     var getModOpts = function(args) {
       return {
@@ -32,10 +32,18 @@
          },
          teardown: function() {
              this.js._cache.resetCache();
-             this.js.destroyRecursive();
+             this.js.resetAll();
          }
       }
     };
+    QUnit.moduleDone = function(name) {
+        if(uow.audio.initJSonic) {
+            // cleanup JSonic singleton before next module runs
+            var js = uow.audio.initJSonic();
+            js.destroyRecursive();
+        }
+    };
+    
     dojo.require('uow.audio.JSonic');
     dojo.require('uow.audio.tests.creation');
     dojo.require('uow.audio.tests.simple');
