@@ -102,13 +102,13 @@ SynthClass = MacOSXSpeechSynth
 if __name__ == '__main__':
     rate = float(sys.argv[1])
     voice = sys.argv[2]
-    if voice == u'default':
+    if voice == 'default':
         voice = None
     prefix = sys.argv[3]
     utterance = sys.stdin.read().decode('utf-8')
     
-    aiff_url = u'file://' + prefix + u'.aiff'
-    wav_file = prefix + u'.wav'
+    aiff_url = 'file://' + prefix + '.aiff'
+    wav_file = prefix + '.wav'
     
     def long_from_string(s):
         '''
